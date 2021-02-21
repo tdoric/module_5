@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.m4.services.UserDetailsImpl;
+import com.example.m5.exception.ErrorExc;
 import com.example.m5.request.LikeRequest;
 import com.example.m5.response.LikeResponse;
 import com.example.m5.service.LikeService;
@@ -24,7 +25,7 @@ public class LikeController {
 	
 	
 	@PostMapping("/like")
-	public ResponseEntity<LikeResponse> registerUser(@Valid @RequestBody LikeRequest likeRequest) {
+	public ResponseEntity<LikeResponse> registerUser(@Valid @RequestBody LikeRequest likeRequest) throws ErrorExc {
 		UserDetailsImpl user = (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		return likeService.processLike(likeRequest, user.getId());
 	}
